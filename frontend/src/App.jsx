@@ -33,7 +33,7 @@ const PrivateRoute = ({ children, adminOnly = false }) => {
 
 function App() {
   return (
-    <Router>
+    <Router basename="/Sweet-Shop-FullStack">
       <AuthProvider>
         <CartProvider>
           <div className="min-h-screen">
