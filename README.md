@@ -194,12 +194,13 @@ Co-authored-by: GitHub Copilot <copilot@github.com>"
 
 ## 👨‍💻 Developer
 
-**Dilseerat Jassal**  
+**Dilseerat Kaur**  
 📧 Email: dilseeratjassal@gmail.com  
 💼 LinkedIn: [linkedin.com/in/dilseerat-kaur-9502702b0](http://linkedin.com/in/dilseerat-kaur-9502702b0/)
 
 ---
 
 > **Disclaimer**: This project is developed for educational and demonstration purposes as part of the Incubyte assessment.
+
 
 
