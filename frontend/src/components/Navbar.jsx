@@ -14,7 +14,7 @@ const Navbar = () => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
               <ShoppingBag className="h-8 w-8 text-primary-600" />
-              <span className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent" style={{ fontFamily: 'Playfair Display, serif' }}>
+              <span className="text-2xl font-bold bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text color-black" style={{ fontFamily: 'Playfair Display, serif' }}>
                 Sweet Delights
               </span>
             </Link>
@@ -44,11 +44,6 @@ const Navbar = () => {
                   <div className="flex items-center space-x-2 px-4 py-2 bg-primary-50 rounded-lg">
                     <User className="h-5 w-5 text-primary-600" />
                     <span className="font-medium text-gray-700">{user.name}</span>
-                    {isAdmin && (
-                      <span className="px-2 py-1 bg-primary-600 text-white text-xs rounded-full">
-                        Admin
-                      </span>
-                    )}
                   </div>
                   <button
                     onClick={logout}
@@ -58,19 +53,17 @@ const Navbar = () => {
                     <span>Logout</span>
                   </button>
                   
-                  {!isAdmin && (
-                    <Link
-                      to="/cart"
-                      className="relative flex items-center justify-center text-gray-700 hover:text-orange-700 transition-colors"
-                    >
-                      <ShoppingCart className="h-6 w-6" />
-                      {getCartCount() > 0 && (
-                        <span className="absolute -top-2 -right-2 bg-orange-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
-                          {getCartCount()}
-                        </span>
-                      )}
-                    </Link>
-                  )}
+                  <Link
+                    to="/cart"
+                    className="relative flex items-center justify-center text-gray-700 hover:text-orange-700 transition-colors"
+                  >
+                    <ShoppingCart className="h-6 w-6" />
+                    {getCartCount() > 0 && (
+                      <span className="absolute -top-2 -right-2 bg-orange-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
+                        {getCartCount()}
+                      </span>
+                    )}
+                  </Link>
                 </div>
               </>
             ) : (
