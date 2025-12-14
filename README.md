@@ -2,7 +2,12 @@
 
 A full-stack web application for managing an Indian sweet shop with user authentication, inventory management, and admin capabilities.
 
-## 🍬 Features
+## � Live Demo
+
+- **Frontend**: [https://dilseerat00.github.io/Sweet-Shop-FullStack/](https://dilseerat00.github.io/Sweet-Shop-FullStack/)
+- **Backend API**: [https://sweet-shop-fullstack.onrender.com](https://sweet-shop-fullstack.onrender.com)
+
+## �🍬 Features
 
 ### User Features
 - **User Authentication**: Secure registration and login with JWT tokens
@@ -95,16 +100,12 @@ You can login using the demo credentials provided below.
 ## 🔑 Demo Credentials
 
 ### Admin Account
-- **Email**: admin@sweetshop.com
+- **Email**: admin@sweetdelights.com
 - **Password**: admin123
 
 ### User Account
-- **Email**: user@example.com
+- **Email**: user@test.com
 - **Password**: user123
-
-### Second User Account
-- **Email**: dilseeratjassal@gmail.com
-- **Password**: Dilseerat$12
 
 ## 📸 Screenshots
 
