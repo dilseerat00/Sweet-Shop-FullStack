@@ -2,7 +2,7 @@
 
 A full-stack web application for managing an Indian sweet shop with user authentication, inventory management, and admin capabilities.
 
-## � Live Demo
+## Live Demo
 
 - **Frontend**: [https://dilseerat00.github.io/Sweet-Shop-FullStack/](https://dilseerat00.github.io/Sweet-Shop-FullStack/) (Deployed on GitHub Pages using Github actions)
 - **Backend API**: [https://sweet-shop-fullstack.onrender.com](https://sweet-shop-fullstack.onrender.com) (Deployed on Render)
@@ -13,7 +13,7 @@ A full-stack web application for managing an Indian sweet shop with user authent
 - **Backend**: Deployed on **Render** with automatic deployments from GitHub
 - **Database**: MongoDB Atlas cloud database
 
-## �🍬 Features
+## Features
 
 ### User Features
 - **User Authentication**: Secure registration and login with JWT tokens
@@ -168,6 +168,22 @@ User cart page showing selected items, quantity controls, delivery fee calculati
 
 ![Shopping Cart](screenshots/cart.png)
 
+### Admin Dashboard
+Admin panel for managing sweets inventory with search, filter, and CRUD operations (Create, Update, Delete, Restock).
+
+![Admin Dashboard](screenshots/admin-dashboard.png)
+
+### Login Page
+User authentication page with email and password fields, password visibility toggle, and validation.
+
+![Login Page](screenshots/login.png)
+
+### Registration Page
+New user registration with name, email, and password fields.
+
+![Registration Page](screenshots/register.png)
+
+
 ## ✅ Test-Driven Development (TDD)
 
 This project follows **Test-Driven Development** principles with comprehensive test coverage:
@@ -210,22 +226,6 @@ cd backend
 npm install
 npm test
 ```
-
-### Admin Dashboard
-Admin panel for managing sweets inventory with search, filter, and CRUD operations (Create, Update, Delete, Restock).
-
-![Admin Dashboard](screenshots/admin-dashboard.png)
-
-### Login Page
-User authentication page with email and password fields, password visibility toggle, and validation.
-
-![Login Page](screenshots/login.png)
-
-### Registration Page
-New user registration with name, email, and password fields.
-
-![Registration Page](screenshots/register.png)
-
 
 ## 🤖 My AI Usage
 
@@ -289,6 +289,7 @@ Co-authored-by: GitHub Copilot <copilot@github.com>"
 ---
 
 > **Disclaimer**: This project is developed for educational and demonstration purposes as part of the Incubyte assessment.
+
 
 
 
