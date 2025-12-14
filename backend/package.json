@@ -7,7 +7,8 @@
     "dev": "nodemon --exec ts-node src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "seed": "ts-node scripts/seed.ts"
+    "seed": "ts-node scripts/seed.ts",
+    "render-start": "npm run build && npm start"
   },
   "keywords": [],
   "author": "",

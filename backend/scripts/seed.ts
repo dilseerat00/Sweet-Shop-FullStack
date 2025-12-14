@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import { connectDB } from '../config/db';
+import { connectDB } from '../src/config/db';
 import Sweet from '../src/models/Sweet';
 import User from '../src/models/User';
 
