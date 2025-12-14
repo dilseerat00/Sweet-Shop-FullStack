@@ -127,6 +127,126 @@ const sampleSweets = [
     ingredients: ['Gram flour', 'Sugar', 'Ghee', 'Cashews', 'Saffron'],
     weight: '500g',
   },
+  {
+    name: 'Kheer',
+    category: 'Milk-based',
+    price: 150,
+    quantity: 55,
+    description: 'Creamy rice pudding flavored with cardamom, saffron, and garnished with nuts.',
+    image: 'https://images.unsplash.com/photo-1607920591413-4ec007e70023?w=400',
+    ingredients: ['Rice', 'Milk', 'Sugar', 'Cardamom', 'Almonds', 'Pistachios'],
+    weight: '500g',
+  },
+  {
+    name: 'Gajar Halwa',
+    category: 'Seasonal',
+    price: 380,
+    quantity: 25,
+    description: 'Carrot-based dessert slow-cooked with milk, ghee, and sugar. A winter delicacy.',
+    image: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400',
+    ingredients: ['Carrots', 'Milk', 'Sugar', 'Ghee', 'Cashews', 'Raisins'],
+    weight: '500g',
+  },
+  {
+    name: 'Besan Ladoo',
+    category: 'Dry Fruits',
+    price: 290,
+    quantity: 45,
+    description: 'Roasted gram flour balls sweetened with sugar and enriched with ghee.',
+    image: 'https://images.unsplash.com/photo-1601001815894-4bb6c81416d7?w=400',
+    ingredients: ['Gram flour', 'Sugar', 'Ghee', 'Cashews', 'Cardamom'],
+    weight: '500g',
+  },
+  {
+    name: 'Ras Malai',
+    category: 'Milk-based',
+    price: 350,
+    quantity: 30,
+    description: 'Soft paneer discs in rich, creamy sweetened milk with saffron and cardamom.',
+    image: 'https://images.unsplash.com/photo-1606857521015-7f9fcf423740?w=400',
+    ingredients: ['Paneer', 'Milk', 'Sugar', 'Saffron', 'Cardamom', 'Pistachios'],
+    weight: '500g',
+  },
+  {
+    name: 'Kalakand',
+    category: 'Milk-based',
+    price: 320,
+    quantity: 35,
+    description: 'Soft milk cake with a grainy texture. Sweet and creamy delight.',
+    image: 'https://images.unsplash.com/photo-1589119908995-c6c1cd6e8743?w=400',
+    ingredients: ['Milk', 'Paneer', 'Sugar', 'Cardamom'],
+    weight: '500g',
+  },
+  {
+    name: 'Coconut Burfi',
+    category: 'Special',
+    price: 240,
+    quantity: 40,
+    description: 'Sweet coconut fudge with a hint of cardamom. Light and flavorful.',
+    image: 'https://images.unsplash.com/photo-1631452180842-f29437f62a37?w=400',
+    ingredients: ['Coconut', 'Sugar', 'Milk', 'Cardamom', 'Ghee'],
+    weight: '500g',
+  },
+  {
+    name: 'Chum Chum',
+    category: 'Syrup-based',
+    price: 230,
+    quantity: 30,
+    description: 'Oval-shaped cottage cheese dessert coated with coconut flakes.',
+    image: 'https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=400',
+    ingredients: ['Cottage cheese', 'Sugar', 'Coconut', 'Cardamom'],
+    weight: '500g',
+  },
+  {
+    name: 'Phirni',
+    category: 'Milk-based',
+    price: 180,
+    quantity: 50,
+    description: 'Ground rice pudding with milk, saffron, and rose water. Served chilled.',
+    image: 'https://images.unsplash.com/photo-1607920591413-4ec007e70023?w=400',
+    ingredients: ['Rice', 'Milk', 'Sugar', 'Saffron', 'Rose water', 'Pistachios'],
+    weight: '500g',
+  },
+  {
+    name: 'Anjeer Barfi',
+    category: 'Dry Fruits',
+    price: 750,
+    quantity: 20,
+    description: 'Premium fig and nut fudge. Rich, healthy, and delicious.',
+    image: 'https://images.unsplash.com/photo-1627662055085-e3c2f0f4b9c0?w=400',
+    ingredients: ['Figs', 'Cashews', 'Almonds', 'Pistachios', 'Sugar', 'Ghee'],
+    weight: '500g',
+  },
+  {
+    name: 'Shrikhand',
+    category: 'Special',
+    price: 270,
+    quantity: 35,
+    description: 'Sweetened strained yogurt flavored with saffron and cardamom. Light and refreshing.',
+    image: 'https://images.unsplash.com/photo-1606857521011-c1b8c45d891c?w=400',
+    ingredients: ['Yogurt', 'Sugar', 'Saffron', 'Cardamom', 'Pistachios'],
+    weight: '500g',
+  },
+  {
+    name: 'Balushahi',
+    category: 'Syrup-based',
+    price: 210,
+    quantity: 40,
+    description: 'Flaky, donut-like pastry soaked in sugar syrup. Crispy and sweet.',
+    image: 'https://images.unsplash.com/photo-1626776877389-6b16dd290f4d?w=400',
+    ingredients: ['Flour', 'Sugar', 'Ghee', 'Yogurt', 'Cardamom'],
+    weight: '500g',
+  },
+  {
+    name: 'Nankhatai',
+    category: 'Special',
+    price: 190,
+    quantity: 60,
+    description: 'Traditional Indian shortbread cookies with a crumbly texture.',
+    image: 'https://images.unsplash.com/photo-1606312619070-d48b4a8d8f8f?w=400',
+    ingredients: ['Flour', 'Sugar', 'Ghee', 'Cardamom', 'Cashews'],
+    weight: '250g',
+  },
 ];
 
 const seedDatabase = async () => {
@@ -141,7 +261,7 @@ const seedDatabase = async () => {
     const admin = await User.create({
       name: 'Admin User',
       email: 'admin@sweetdelights.com',
-      password: 'admin123',
+      password: 'Admin@123',
       role: 'admin',
     });
 
@@ -149,7 +269,7 @@ const seedDatabase = async () => {
     const user = await User.create({
       name: 'Test User',
       email: 'user@test.com',
-      password: 'user123',
+      password: 'User@123',
       role: 'user',
     });
 
@@ -159,10 +279,10 @@ const seedDatabase = async () => {
     console.log('✅ Database seeded successfully!');
     console.log('\n📧 Admin Login:');
     console.log('   Email: admin@sweetdelights.com');
-    console.log('   Password: admin123');
+    console.log('   Password: Admin@123');
     console.log('\n👤 User Login:');
     console.log('   Email: user@test.com');
-    console.log('   Password: user123');
+    console.log('   Password: User@123');
     console.log(`\n🍬 ${sampleSweets.length} sweets added to database\n`);
 
     process.exit(0);

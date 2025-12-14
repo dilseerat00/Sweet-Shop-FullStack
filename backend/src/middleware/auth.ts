@@ -33,7 +33,7 @@ export const protect = async (req: AuthRequest, res: Response, next: NextFunctio
     req.user = user;
     next();
   } catch (error) {
-    return res.status(401).json({ success: false, message: 'Not authorized to access this route' });
+    return res.status(401).json({ success: false, message: 'Invalid token' });
   }
 };
 

@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
   const checkAuth = async () => {
     try {
       const response = await authAPI.getMe();
-      setUser(response.data.user);
+      setUser(response.data.data);
     } catch (error) {
       localStorage.removeItem('token');
       setToken(null);
@@ -47,7 +47,10 @@ export const AuthProvider = ({ children }) => {
       toast.success('Registration successful!');
       return true;
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Registration failed');
+      const errorMessage = error.response?.data?.errors 
+        ? error.response.data.errors.map(err => err.message).join(', ')
+        : error.response?.data?.message || 'Registration failed';
+      toast.error(errorMessage);
       return false;
     }
   };
@@ -62,7 +65,10 @@ export const AuthProvider = ({ children }) => {
       toast.success('Login successful!');
       return true;
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Login failed');
+      const errorMessage = error.response?.data?.errors 
+        ? error.response.data.errors.map(err => err.message).join(', ')
+        : error.response?.data?.message || 'Login failed';
+      toast.error(errorMessage);
       return false;
     }
   };

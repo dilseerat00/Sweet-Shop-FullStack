@@ -1,13 +1,19 @@
 import { Response } from 'express';
-import Sweet from '../models/Sweet';
+import * as sweetService from '../services/sweetService';
 import { AuthRequest } from '../middleware/auth';
+
+/**
+ * Controller for sweet management endpoints
+ * Follows Single Responsibility Principle - only handles HTTP requests/responses
+ * Business logic delegated to sweetService
+ */
 
 // @desc    Get all sweets
 // @route   GET /api/sweets
 // @access  Public
 export const getSweets = async (req: AuthRequest, res: Response) => {
   try {
-    const sweets = await Sweet.find().sort({ createdAt: -1 });
+    const sweets = await sweetService.getAllSweets();
 
     res.status(200).json({
       success: true,
@@ -29,26 +35,13 @@ export const searchSweets = async (req: AuthRequest, res: Response) => {
   try {
     const { name, category, minPrice, maxPrice } = req.query;
 
-    let query: any = {};
+    const criteria: any = {};
+    if (name) criteria.name = name as string;
+    if (category) criteria.category = category as string;
+    if (minPrice) criteria.minPrice = Number(minPrice);
+    if (maxPrice) criteria.maxPrice = Number(maxPrice);
 
-    // Text search
-    if (name) {
-      query.$text = { $search: name as string };
-    }
-
-    // Category filter
-    if (category) {
-      query.category = category;
-    }
-
-    // Price range filter
-    if (minPrice || maxPrice) {
-      query.price = {};
-      if (minPrice) query.price.$gte = Number(minPrice);
-      if (maxPrice) query.price.$lte = Number(maxPrice);
-    }
-
-    const sweets = await Sweet.find(query);
+    const sweets = await sweetService.searchSweets(criteria);
 
     res.status(200).json({
       success: true,
@@ -68,21 +61,15 @@ export const searchSweets = async (req: AuthRequest, res: Response) => {
 // @access  Public
 export const getSweet = async (req: AuthRequest, res: Response) => {
   try {
-    const sweet = await Sweet.findById(req.params.id);
-
-    if (!sweet) {
-      return res.status(404).json({
-        success: false,
-        message: 'Sweet not found',
-      });
-    }
+    const sweet = await sweetService.getSweetById(req.params.id!);
 
     res.status(200).json({
       success: true,
       data: sweet,
     });
   } catch (error: any) {
-    res.status(500).json({
+    const statusCode = error.message === 'Sweet not found' ? 404 : 500;
+    res.status(statusCode).json({
       success: false,
       message: error.message || 'Server error',
     });
@@ -94,7 +81,7 @@ export const getSweet = async (req: AuthRequest, res: Response) => {
 // @access  Private/Admin
 export const createSweet = async (req: AuthRequest, res: Response) => {
   try {
-    const sweet = await Sweet.create(req.body);
+    const sweet = await sweetService.createSweet(req.body);
 
     res.status(201).json({
       success: true,
@@ -113,28 +100,15 @@ export const createSweet = async (req: AuthRequest, res: Response) => {
 // @access  Private/Admin
 export const updateSweet = async (req: AuthRequest, res: Response) => {
   try {
-    const sweet = await Sweet.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      {
-        new: true,
-        runValidators: true,
-      }
-    );
-
-    if (!sweet) {
-      return res.status(404).json({
-        success: false,
-        message: 'Sweet not found',
-      });
-    }
+    const sweet = await sweetService.updateSweet(req.params.id!, req.body);
 
     res.status(200).json({
       success: true,
       data: sweet,
     });
   } catch (error: any) {
-    res.status(500).json({
+    const statusCode = error.message === 'Sweet not found' ? 404 : 500;
+    res.status(statusCode).json({
       success: false,
       message: error.message || 'Server error',
     });
@@ -146,21 +120,15 @@ export const updateSweet = async (req: AuthRequest, res: Response) => {
 // @access  Private/Admin
 export const deleteSweet = async (req: AuthRequest, res: Response) => {
   try {
-    const sweet = await Sweet.findByIdAndDelete(req.params.id);
-
-    if (!sweet) {
-      return res.status(404).json({
-        success: false,
-        message: 'Sweet not found',
-      });
-    }
+    await sweetService.deleteSweet(req.params.id!);
 
     res.status(200).json({
       success: true,
       message: 'Sweet deleted successfully',
     });
   } catch (error: any) {
-    res.status(500).json({
+    const statusCode = error.message === 'Sweet not found' ? 404 : 500;
+    res.status(statusCode).json({
       success: false,
       message: error.message || 'Server error',
     });
@@ -173,32 +141,7 @@ export const deleteSweet = async (req: AuthRequest, res: Response) => {
 export const purchaseSweet = async (req: AuthRequest, res: Response) => {
   try {
     const { quantity } = req.body;
-
-    if (!quantity || quantity <= 0) {
-      return res.status(400).json({
-        success: false,
-        message: 'Please provide a valid quantity',
-      });
-    }
-
-    const sweet = await Sweet.findById(req.params.id);
-
-    if (!sweet) {
-      return res.status(404).json({
-        success: false,
-        message: 'Sweet not found',
-      });
-    }
-
-    if (sweet.quantity < quantity) {
-      return res.status(400).json({
-        success: false,
-        message: 'Insufficient stock',
-      });
-    }
-
-    sweet.quantity -= quantity;
-    await sweet.save();
+    const sweet = await sweetService.purchaseSweet(req.params.id!, quantity);
 
     res.status(200).json({
       success: true,
@@ -206,7 +149,11 @@ export const purchaseSweet = async (req: AuthRequest, res: Response) => {
       data: sweet,
     });
   } catch (error: any) {
-    res.status(500).json({
+    let statusCode = 500;
+    if (error.message === 'Sweet not found') statusCode = 404;
+    else if (error.message.includes('Insufficient stock') || error.message.includes('valid quantity')) statusCode = 400;
+
+    res.status(statusCode).json({
       success: false,
       message: error.message || 'Server error',
     });
@@ -219,25 +166,7 @@ export const purchaseSweet = async (req: AuthRequest, res: Response) => {
 export const restockSweet = async (req: AuthRequest, res: Response) => {
   try {
     const { quantity } = req.body;
-
-    if (!quantity || quantity <= 0) {
-      return res.status(400).json({
-        success: false,
-        message: 'Please provide a valid quantity',
-      });
-    }
-
-    const sweet = await Sweet.findById(req.params.id);
-
-    if (!sweet) {
-      return res.status(404).json({
-        success: false,
-        message: 'Sweet not found',
-      });
-    }
-
-    sweet.quantity += quantity;
-    await sweet.save();
+    const sweet = await sweetService.restockSweet(req.params.id!, quantity);
 
     res.status(200).json({
       success: true,
@@ -245,7 +174,11 @@ export const restockSweet = async (req: AuthRequest, res: Response) => {
       data: sweet,
     });
   } catch (error: any) {
-    res.status(500).json({
+    let statusCode = 500;
+    if (error.message === 'Sweet not found') statusCode = 404;
+    else if (error.message.includes('valid quantity')) statusCode = 400;
+
+    res.status(statusCode).json({
       success: false,
       message: error.message || 'Server error',
     });

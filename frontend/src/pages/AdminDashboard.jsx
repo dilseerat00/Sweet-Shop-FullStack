@@ -74,8 +74,17 @@ const AdminDashboard = () => {
         ...formData,
         price: Number(formData.price),
         quantity: Number(formData.quantity),
-        ingredients: formData.ingredients.split(',').map((i) => i.trim()).filter(Boolean),
+        ingredients: formData.ingredients 
+          ? formData.ingredients.split(',').map((i) => i.trim()).filter(Boolean)
+          : undefined,
       };
+
+      // Remove undefined fields
+      Object.keys(sweetData).forEach(key => {
+        if (sweetData[key] === undefined || sweetData[key] === '') {
+          delete sweetData[key];
+        }
+      });
 
       if (editingSweet) {
         await sweetsAPI.update(editingSweet._id, sweetData);
@@ -88,7 +97,11 @@ const AdminDashboard = () => {
       resetForm();
       fetchSweets();
     } catch (error) {
-      toast.error(error.response?.data?.message || 'Operation failed');
+      const errorMessage = error.response?.data?.errors 
+        ? error.response.data.errors.map(err => `${err.field}: ${err.message}`).join(', ')
+        : error.response?.data?.message || 'Operation failed';
+      toast.error(errorMessage);
+      console.error('Validation error:', error.response?.data);
     }
   };
 

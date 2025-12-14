@@ -4,8 +4,14 @@ A full-stack web application for managing an Indian sweet shop with user authent
 
 ## � Live Demo
 
-- **Frontend**: [https://dilseerat00.github.io/Sweet-Shop-FullStack/](https://dilseerat00.github.io/Sweet-Shop-FullStack/)
-- **Backend API**: [https://sweet-shop-fullstack.onrender.com](https://sweet-shop-fullstack.onrender.com)
+- **Frontend**: [https://dilseerat00.github.io/Sweet-Shop-FullStack/](https://dilseerat00.github.io/Sweet-Shop-FullStack/) (Deployed on GitHub Pages using Github actions)
+- **Backend API**: [https://sweet-shop-fullstack.onrender.com](https://sweet-shop-fullstack.onrender.com) (Deployed on Render)
+
+### Deployment
+
+- **Frontend**: Deployed on **GitHub Pages** for static hosting
+- **Backend**: Deployed on **Render** with automatic deployments from GitHub
+- **Database**: MongoDB Atlas cloud database
 
 ## �🍬 Features
 
@@ -29,6 +35,8 @@ A full-stack web application for managing an Indian sweet shop with user authent
 - **Framework**: Express.js with TypeScript
 - **Database**: MongoDB with Mongoose ODM
 - **Authentication**: JWT (JSON Web Tokens) with bcryptjs
+- **Testing**: Jest, Supertest, MongoDB Memory Server
+- **Validation**: express-validator
 
 ### Frontend
 - **Framework**: React 18
@@ -91,7 +99,43 @@ npm run dev
 
 The frontend application will run on `http://localhost:5173`
 
-#### 4. Access the Application
+#### 4. Running Tests
+
+```bash
+# Navigate to backend directory
+cd backend
+
+# Run all tests with coverage
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+```
+
+**View Test Coverage Report:**
+
+After running `npm test`, an HTML coverage report is automatically generated at `backend/coverage/index.html`. Open this file in your browser to see detailed test coverage:
+
+```bash
+# Windows
+start backend/coverage/index.html
+
+# Mac
+open backend/coverage/index.html
+
+# Linux
+xdg-open backend/coverage/index.html
+```
+
+The report shows:
+- Test suite results (passing/failing tests)
+- Code coverage percentages
+- Line-by-line coverage visualization
+- Uncovered code sections
+
+See [TESTING_GUIDE.md](backend/TESTING_GUIDE.md) for detailed testing documentation.
+
+#### 5. Access the Application
 
 Open your browser and navigate to `http://localhost:5173`
 
@@ -101,11 +145,11 @@ You can login using the demo credentials provided below.
 
 ### Admin Account
 - **Email**: admin@sweetdelights.com
-- **Password**: admin123
+- **Password**: Admin@123
 
 ### User Account
 - **Email**: user@test.com
-- **Password**: user123
+- **Password**: User@123
 
 ## 📸 Screenshots
 
@@ -123,6 +167,49 @@ Responsive product cards with images, descriptions, price, stock information, an
 User cart page showing selected items, quantity controls, delivery fee calculation, and order summary with total price.
 
 ![Shopping Cart](screenshots/cart.png)
+
+## ✅ Test-Driven Development (TDD)
+
+This project follows **Test-Driven Development** principles with comprehensive test coverage:
+
+### Test Statistics
+- **Total Tests**: 114
+- **Model Tests**: 39 (User + Sweet models)
+- **Middleware Tests**: 11 (Authentication & Authorization)
+- **Controller Tests**: 64 (Auth & Sweet APIs)
+
+### Test Coverage
+- **Target Coverage**: 80%+
+- **Branches**: 80%
+- **Functions**: 80%
+- **Lines**: 80%
+- **Statements**: 80%
+
+### Technologies
+- **Jest**: Testing framework
+- **Supertest**: HTTP integration testing
+- **MongoDB Memory Server**: In-memory database for tests
+- **express-validator**: Input validation
+
+### Key Features Tested
+✅ User registration and login with validation  
+✅ JWT authentication and authorization  
+✅ Sweet CRUD operations with role-based access  
+✅ Input validation for all endpoints  
+✅ Stock management (purchase and restock)  
+✅ Search and filter functionality  
+✅ Error handling and edge cases
+
+### Documentation
+- [TDD Documentation](backend/TDD_DOCUMENTATION.md) - Detailed test breakdown
+- [Testing Guide](backend/TESTING_GUIDE.md) - Quick reference for running tests
+
+### Running Tests
+```bash
+cd backend
+npm install
+npm test
+```
 
 ### Admin Dashboard
 Admin panel for managing sweets inventory with search, filter, and CRUD operations (Create, Update, Delete, Restock).

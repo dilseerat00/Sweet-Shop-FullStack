@@ -102,6 +102,9 @@ const Register = () => {
                   {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </button>
               </div>
+              <p className="mt-1 text-xs text-gray-500">
+                Must be at least 6 characters with uppercase, lowercase, and number
+              </p>
             </div>
 
             <button type="submit" className="btn-primary w-full">
