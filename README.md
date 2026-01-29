@@ -288,8 +288,6 @@ Co-authored-by: GitHub Copilot <copilot@github.com>"
 
 ---
 
-> **Disclaimer**: This project is developed for educational and demonstration purposes as part of the Incubyte assessment.
-
 
 
 
